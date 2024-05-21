@@ -1,8 +1,4 @@
-# Yumemi-frontend-coding-test-app
-
- [Deploied Preview here](https://yumemi-frontend-coding-test-app.vercel.app/)
-
-## 開発するためには
+## 導入方法
 
 ```bash
 git clone https://github.com/dcKK0302/yumemi-frontend-coding-test.git
@@ -20,7 +16,7 @@ NEXT_PUBLIC_RESAS_API_URI=https://opendata.resas-portal.go.jp
 NEXT_PUBLIC_RESAS_API_KEY=自分で取得したRESASAPIのapikeyを設定してください。
 ```
 
-### 起動とテスト
+### 起動方法
 
 ```bash
 npm start
