@@ -1,25 +1,29 @@
+// src/components/PrefectureCheckboxes.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { fetchPrefectures } from '../api/prefectures';
 
+/**
+ * 都道府県情報をチェックボックス付きで表示し、選択を管理する
+ * @param {Object} props - コンポーネントのプロパティ
+ * @param {Function} props.onChange - チェックボックス変更時に呼び出されるコールバック関数
+ * @param {Array} props.selectedPrefectures - 選択された都道府県のリスト
+ *
+ * @returns {JSX.Element} - 都道府県チェックボックスを含むJSX要素
+ */
 export default function PrefectureCheckboxes({ onChange, selectedPrefectures }) {
     const [prefData, setPrefData] = useState([]);
 
     useEffect(() => {
-        const fetchPrefectures = async () => {
-            const url = `${process.env.REACT_APP_API_URL}/api/v1/prefectures`;
-            const api = process.env.REACT_APP_API_KEY
+        const loadPrefectures = async () => {
             try {
-                const response = await axios.get(url, {
-                    headers: { 'X-API-KEY': api },
-                });
-                console.log("成功", response.data)
-                setPrefData(response.data.result);
+                const data = await fetchPrefectures();
+                setPrefData(data);
             } catch (error) {
-                console.error('エラー', error);
+                console.error('都道府県データの取得に失敗しました。', error);
             }
         };
 
-        fetchPrefectures();
+        loadPrefectures();
     }, []);
 
     return (
