@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import TESTApp from "./TESTApp"
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <TESTApp />
+
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>
 );
 
 reportWebVitals();
