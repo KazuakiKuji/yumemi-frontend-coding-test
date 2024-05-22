@@ -4,15 +4,30 @@ import { fetchUsers, addUser, updateUser, deleteUser } from '../db/users';
 import PrefectureCheckboxes from './PrefectureCheckboxes';
 import CreateChart from './CreateChart';
 import usePopulationData from '../hooks/usePopulationData';
+import UserForm from './UserForm';
+import UserList from './UserList';
 
-export default function RegisterLocation() {
+/**
+ * メインコンテンツにあたるコンポーネント。以下の処理を行う
+ * １．ユーザーの登録・管理
+ * ２．都道府県データの管理
+ * ３．選択された都道府県を元に、グラフを表示する
+ */
+export default function UserManagement() {
+    // ユーザーデータの状態管理
     const [users, setUsers] = useState([]);
+    // ユーザー名の状態管理
     const [name, setName] = useState('');
+    // 都道府県データの状態管理
     const [prefectures, setPrefectures] = useState([]);
+    // 選択された都道府県の状態管理
     const [location, setLocation] = useState('');
+    // 選択されたユーザーIDの状態管理
     const [selectUserID, setSelectUserID] = useState('');
+    // 選択された都道府県リストの状態管理
     const [selectedPrefectures, setSelectedPrefectures] = useState([]);
 
+    // 都道府県データを取得して設定する ※トリガー：マウント時
     useEffect(() => {
         const loadPrefectures = async () => {
             try {
@@ -26,6 +41,7 @@ export default function RegisterLocation() {
         loadPrefectures();
     }, []);
 
+    // ユーザーデータを取得して設定する ※トリガー：マウント時
     useEffect(() => {
         const loadUsers = async () => {
             try {
@@ -39,6 +55,8 @@ export default function RegisterLocation() {
         loadUsers();
     }, []);
 
+    // 選択されたユーザーIDに基づいてユーザー情報を設定する
+    // トリガー：selectタグから値を変更したとき, ユーザーの追加,更新,削除の時, 都道府県データを取得したとき
     useEffect(() => {
         if (selectUserID) {
             const selectedUser = users.find(user => user.id === parseInt(selectUserID, 10));
@@ -54,6 +72,9 @@ export default function RegisterLocation() {
         }
     }, [selectUserID, users, prefectures]);
 
+    /**
+     * ユーザー情報をデータベースに追加or更新する関数
+     */
     const handleAddUser = async () => {
         if (name === "" || location === "") {
             alert("氏名欄、都道府県欄 に値を入れてください");
@@ -63,13 +84,13 @@ export default function RegisterLocation() {
         const existingUser = users.find(user => user.name === name);
 
         try {
-            if (existingUser) {
+            if (existingUser) { // 更新処理
                 const confirmUpdate = window.confirm("氏名が既に存在します。内容を更新しますか？");
                 if (confirmUpdate) {
                     const updatedUser = await updateUser(existingUser.id, name, location);
                     setUsers(users.map(user => user.id === existingUser.id ? updatedUser : user));
                 }
-            } else {
+            } else { // 新規追加処理
                 const newUser = await addUser(name, location);
                 setUsers([...users, newUser]);
             }
@@ -81,6 +102,9 @@ export default function RegisterLocation() {
         }
     };
 
+    /**
+     * ユーザーをデータベースから削除する関数
+     */
     const handleDeleteUser = async () => {
         if (!selectUserID) {
             alert("削除するユーザーを選択してください");
@@ -104,49 +128,55 @@ export default function RegisterLocation() {
         }
     };
 
-    const handleCheckboxChange = (pref) => {
-        const isExistencePref = selectedPrefectures.findIndex((item) => item.prefCode === pref.prefCode);
-        if (isExistencePref === -1) {
-            setSelectedPrefectures([...selectedPrefectures, pref]);
-            setLocation(pref.prefName);
-        } else {
-            setSelectedPrefectures(selectedPrefectures.filter((item) => item.prefCode !== pref.prefCode));
+    /**
+      * checkboxによって、都道府県の選択状態を更新する関数
+      * @param {Array} newSelectedPrefectures - 新しい選択された都道府県リスト
+      */
+    const handlePrefectureChange = (newSelectedPrefectures) => {
+        setSelectedPrefectures(newSelectedPrefectures);
+        if (newSelectedPrefectures.length === 1) {
+            setLocation(newSelectedPrefectures[0].prefName);
+        } else if (newSelectedPrefectures.length === 0) {
             setLocation('');
         }
     };
 
+    /**
+     * selectタグによって、都道府県の選択状態を更新する関数
+     * @param {Object} event - セレクトボックスのchangeイベント
+     */
+    const handleSelectChange = (event) => {
+        const selectedPref = prefectures.find(pref => pref.prefName === event.target.value);
+        setSelectedPrefectures(selectedPref ? [selectedPref] : []);
+        setLocation(event.target.value);
+    };
+
+    // 選択された都道府県に基づいて人口データを取得する
     const populationData = usePopulationData(selectedPrefectures);
 
     return (
         <div>
             <h1>ユーザー登録</h1>
-            <select id="users" value={selectUserID} onChange={(e) => setSelectUserID(e.target.value)}>
-                <option value="">追加されたメンバー</option>
-                {users.map((user, index) => (
-                    <option key={user.id || index} value={user.id}>
-                        name: {user.name}, location: {user.location}
-                    </option>
-                ))}
-            </select>
-            <button onClick={handleDeleteUser}>データから削除</button>
-            <div>
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="氏名"
-                />
-                <select id="prefecture" value={location} onChange={(e) => setLocation(e.target.value)}>
-                    <option value="">出身地を選択してください</option>
-                    {prefectures.map((pref) => (
-                        <option key={pref.prefCode} value={pref.prefName}>
-                            {pref.prefName}
-                        </option>
-                    ))}
-                </select>
-                <button onClick={handleAddUser}>ユーザー追加or更新</button>
-            </div>
-            <PrefectureCheckboxes onChange={handleCheckboxChange} selectedPrefectures={selectedPrefectures} />
+            <UserList
+                users={users}
+                selectUserID={selectUserID}
+                setSelectUserID={setSelectUserID}
+                handleDeleteUser={handleDeleteUser}
+            />
+            <UserForm
+                name={name}
+                setName={setName}
+                location={location}
+                setLocation={setLocation}
+                prefectures={prefectures}
+                handleAddUser={handleAddUser}
+                handleSelectChange={handleSelectChange}
+            />
+            <PrefectureCheckboxes
+                prefectures={prefectures}
+                selectedPrefectures={selectedPrefectures}
+                onChange={handlePrefectureChange}
+            />
             <CreateChart populationData={populationData} selectedPrefectures={selectedPrefectures} />
         </div>
     );
