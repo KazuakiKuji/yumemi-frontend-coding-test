@@ -157,7 +157,7 @@ export default function UserManagement() {
 
     return (
         <Container className='contents mt-4'>
-            <Row>
+            {/* <Row>
                 <Col>
                     <h1 className="text-center">ユーザー登録</h1>
                 </Col>
@@ -182,7 +182,7 @@ export default function UserManagement() {
                         handleSelectChange={handleSelectChange}
                     />
                 </Col>
-            </Row>
+            </Row> */}
             <Row className='mt-4'>
                 <Col>
                     <h1 className="text-center">都道府県 選択欄</h1>
