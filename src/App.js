@@ -1,12 +1,12 @@
 import React from 'react';
-import RegisterLocation from './components/RegisterLocation';
+import UserManagement from './components/UserManagement';
 
 function App() {
   return (
     <div className="body">
       <header></header>
       <main>
-        <RegisterLocation />
+        <UserManagement />
       </main>
       <footer></footer>
     </div>
