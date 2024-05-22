@@ -32,7 +32,7 @@ export default function CreateChart({ populationData, selectedPrefectures }) {
                 label: pref.prefName,
                 backgroundColor: color,
                 borderColor: color,
-                borderWidth: 1,
+                borderWidth: 1.5,
                 hoverBackgroundColor: color,
                 hoverBorderColor: color,
                 data: data,

@@ -7,11 +7,11 @@ import TESTApp from "./TESTApp"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <TESTApp />
+  // <TESTApp />
 
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
 
 reportWebVitals();
