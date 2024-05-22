@@ -16,7 +16,7 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://github.com/dcKK0302/yumemi-frontend-coding-test.git",
+  "homepage": "https://dcKK0302.github.io/yumemi-frontend-coding-test.git",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
