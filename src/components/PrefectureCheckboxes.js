@@ -1,4 +1,3 @@
-// src/components/PrefectureCheckboxes.js
 import React, { useState, useEffect } from 'react';
 import { fetchPrefectures } from '../api/prefectures';
 

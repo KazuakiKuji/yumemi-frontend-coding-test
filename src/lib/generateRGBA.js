@@ -19,7 +19,7 @@ const generateRGBA = () => {
     } while (lastColor && colorDistance([r, g, b], lastColor) < 100);
 
     lastColor = [r, g, b];
-    const a = 0.8;
+    const a = 1;
     return `rgba(${r}, ${g}, ${b}, ${a})`;
 }
 

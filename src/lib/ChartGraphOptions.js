@@ -50,7 +50,7 @@ const options = {
     },
     elements: {
         line: {
-            tension: 0.4, // 線のテンションを設定（0にすると直線）
+            tension: 0, // 線のテンションを設定（0にすると直線）
         },
     },
 };

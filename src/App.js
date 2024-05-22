@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PrefectureCheckboxes from "./components/PrefectureCheckboxes";
 import CreateChart from "./components/CreateChart";
 import usePopulationData from './hooks/usePopulationData';
+import RegisterLocation from './components/RegisterLocation';
 
 function App() {
   const [selectedPrefectures, setSelectedPrefectures] = useState([]);
@@ -21,8 +22,9 @@ function App() {
     <div className="body">
       <header></header>
       <main>
-        <PrefectureCheckboxes onChange={handleCheckboxChange} selectedPrefectures={selectedPrefectures} />
-        <CreateChart populationData={populationData} selectedPrefectures={selectedPrefectures} />
+        <RegisterLocation  />
+        {/* <PrefectureCheckboxes onChange={handleCheckboxChange} selectedPrefectures={selectedPrefectures} />
+        <CreateChart populationData={populationData} selectedPrefectures={selectedPrefectures} /> */}
       </main>
       <footer></footer>
     </div>
