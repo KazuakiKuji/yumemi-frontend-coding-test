@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import "../assets/style/contents/contents.css"
 import { fetchPrefectures } from '../api/prefectures';
 import { fetchUsers, addUser, updateUser, deleteUser } from '../db/users';
 import PrefectureCheckboxes from './PrefectureCheckboxes';
@@ -155,7 +156,7 @@ export default function UserManagement() {
     const populationData = usePopulationData(selectedPrefectures);
 
     return (
-        <div>
+        <div className='contents'>
             <h1>ユーザー登録</h1>
             <UserList
                 users={users}
