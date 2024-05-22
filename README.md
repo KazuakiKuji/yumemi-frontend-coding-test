@@ -1,3 +1,6 @@
+## デプロイ（DB管理を含めない）
+https://dckk0302.github.io/yumemi-frontend-coding-test/
+
 ## 導入方法
 
 ```bash
