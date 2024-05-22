@@ -3,6 +3,7 @@ import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { options } from "../lib/ChartGraphOptions";
 import useColorMap from '../hooks/useColorMap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 /**
  * 選択された都道府県の人口データを基に、折れ線グラフを表示する
@@ -49,9 +50,14 @@ export default function CreateChart({ populationData, selectedPrefectures }) {
     }, [labels, datasets]);
 
     return (
-        <div>
-            <h2>都道府県別 総人口推移</h2>
-            <Line data={data} options={options} />
-        </div>
+        <Container className="mt-4">
+            <Row>
+                <Col>
+                    <h2 className="text-center">都道府県別 総人口推移</h2>
+                    <Line data={data} options={options} />
+                </Col>
+            </Row>
+        </Container>
     );
+
 }
