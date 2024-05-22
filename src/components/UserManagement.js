@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import "../assets/style/contents/contents.css"
 import { fetchPrefectures } from '../api/prefectures';
 import { fetchUsers, addUser, updateUser, deleteUser } from '../db/users';
 import PrefectureCheckboxes from './PrefectureCheckboxes';
@@ -7,6 +6,7 @@ import CreateChart from './CreateChart';
 import usePopulationData from '../hooks/usePopulationData';
 import UserForm from './UserForm';
 import UserList from './UserList';
+import { Container, Row, Col } from 'react-bootstrap';
 
 /**
  * メインコンテンツにあたるコンポーネント。以下の処理を行う
@@ -156,29 +156,52 @@ export default function UserManagement() {
     const populationData = usePopulationData(selectedPrefectures);
 
     return (
-        <div className='contents'>
-            <h1>ユーザー登録</h1>
-            <UserList
-                users={users}
-                selectUserID={selectUserID}
-                setSelectUserID={setSelectUserID}
-                handleDeleteUser={handleDeleteUser}
-            />
-            <UserForm
-                name={name}
-                setName={setName}
-                location={location}
-                setLocation={setLocation}
-                prefectures={prefectures}
-                handleAddUser={handleAddUser}
-                handleSelectChange={handleSelectChange}
-            />
-            <PrefectureCheckboxes
-                prefectures={prefectures}
-                selectedPrefectures={selectedPrefectures}
-                onChange={handlePrefectureChange}
-            />
-            <CreateChart populationData={populationData} selectedPrefectures={selectedPrefectures} />
-        </div>
+        <Container className='contents mt-4'>
+            <Row>
+                <Col>
+                    <h1 className="text-center">ユーザー登録</h1>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={6}>
+                    <UserList
+                        users={users}
+                        selectUserID={selectUserID}
+                        setSelectUserID={setSelectUserID}
+                        handleDeleteUser={handleDeleteUser}
+                    />
+                </Col>
+                <Col md={6}>
+                    <UserForm
+                        name={name}
+                        setName={setName}
+                        location={location}
+                        setLocation={setLocation}
+                        prefectures={prefectures}
+                        handleAddUser={handleAddUser}
+                        handleSelectChange={handleSelectChange}
+                    />
+                </Col>
+            </Row>
+            <Row className='mt-4'>
+                <Col>
+                    <h1 className="text-center">都道府県 選択欄</h1>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <PrefectureCheckboxes
+                        prefectures={prefectures}
+                        selectedPrefectures={selectedPrefectures}
+                        onChange={handlePrefectureChange}
+                    />
+                </Col>
+            </Row>
+            <Row className='mt-4'>
+                <Col>
+                    <CreateChart populationData={populationData} selectedPrefectures={selectedPrefectures} />
+                </Col>
+            </Row>
+        </Container>
     );
 }

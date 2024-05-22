@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form, Row, Col } from 'react-bootstrap';
 
 /**
  * 都道府県のリストをチェックボックスとして表示し、選択された都道府県の状態を管理するコンポーネント
@@ -21,20 +22,23 @@ const PrefectureCheckboxes = ({ prefectures, selectedPrefectures, onChange }) =>
     };
 
     return (
-        <div>
-            {prefectures.map((pref) => (
-                <label key={pref.prefCode}>
-                    <input
-                        type="checkbox"
-                        value={pref.prefCode}
-                        checked={selectedPrefectures.some((item) => item.prefCode === pref.prefCode)}
-                        onChange={() => handleCheckboxChange(pref)}
-                    />
-                    {pref.prefName}
-                </label>
-            ))}
-        </div>
+        <Form className="container mt-4">
+            <Row>
+                {prefectures.map((pref) => (
+                    <Col key={pref.prefCode} xs={6} sm={4} md={3} lg={2}>
+                        <Form.Check
+                            type="checkbox"
+                            id={`prefecture-${pref.prefCode}`}
+                            label={pref.prefName}
+                            checked={selectedPrefectures.some((item) => item.prefCode === pref.prefCode)}
+                            onChange={() => handleCheckboxChange(pref)}
+                        />
+                    </Col>
+                ))}
+            </Row>
+        </Form>
     );
+
 };
 
 export default PrefectureCheckboxes;

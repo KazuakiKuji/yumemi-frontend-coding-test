@@ -1,8 +1,8 @@
 import React from 'react';
-import "../assets/style/footer/footer.css"
 
 export default function Footer() {
     return (
-        <div className='footer'>@g.dreamcareer.co.jp</div>
-    )
+        <footer className='footer bg-primary text-white text-center py-3'>
+            kazuaki.kuji@g.dreamcareer.co.jp
+        </footer>)
 }

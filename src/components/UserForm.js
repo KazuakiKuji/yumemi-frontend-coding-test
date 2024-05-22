@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form, Button } from 'react-bootstrap';
 
 /**
  * ユーザーが記述した内容を元に、データベースの更新を行うコンポーネント
@@ -12,24 +13,39 @@ import React from 'react';
  */
 const UserForm = ({ name, setName, location, setLocation, prefectures, handleAddUser, handleSelectChange }) => {
     return (
-        <div>
-            <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="氏名"
-            />
-            <select id="prefecture" value={location} onChange={handleSelectChange}>
-                <option value="">出身地を選択してください</option>
-                {prefectures.map((pref) => (
-                    <option key={pref.prefCode} value={pref.prefName}>
-                        {pref.prefName}
-                    </option>
-                ))}
-            </select>
-            <button onClick={handleAddUser}>ユーザー追加or更新</button>
+        <div className="container mt-4">
+            <Form>
+                <Form.Group controlId="formUserName">
+                    <Form.Label>氏名</Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="氏名"
+                    />
+                </Form.Group>
+                <Form.Group controlId="formUserLocation">
+                    <Form.Label>出身地</Form.Label>
+                    <Form.Control
+                        as="select"
+                        value={location}
+                        onChange={handleSelectChange}
+                    >
+                        <option value="">出身地を選択してください</option>
+                        {prefectures.map((pref) => (
+                            <option key={pref.prefCode} value={pref.prefName}>
+                                {pref.prefName}
+                            </option>
+                        ))}
+                    </Form.Control>
+                </Form.Group>
+                <Button variant="primary" onClick={handleAddUser}>
+                    ユーザー追加or更新
+                </Button>
+            </Form>
         </div>
     );
+
 };
 
 export default UserForm;
