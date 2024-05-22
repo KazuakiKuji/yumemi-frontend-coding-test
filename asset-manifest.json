@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/dcKK0302/yumemi-frontend-coding-test.git/static/css/main.d5289b2f.css",
-    "main.js": "/dcKK0302/yumemi-frontend-coding-test.git/static/js/main.1c974545.js",
-    "static/js/453.74088c6a.chunk.js": "/dcKK0302/yumemi-frontend-coding-test.git/static/js/453.74088c6a.chunk.js",
-    "index.html": "/dcKK0302/yumemi-frontend-coding-test.git/index.html",
-    "main.d5289b2f.css.map": "/dcKK0302/yumemi-frontend-coding-test.git/static/css/main.d5289b2f.css.map",
-    "main.1c974545.js.map": "/dcKK0302/yumemi-frontend-coding-test.git/static/js/main.1c974545.js.map",
-    "453.74088c6a.chunk.js.map": "/dcKK0302/yumemi-frontend-coding-test.git/static/js/453.74088c6a.chunk.js.map"
+    "main.css": "/yumemi-frontend-coding-test/static/css/main.d5289b2f.css",
+    "main.js": "/yumemi-frontend-coding-test/static/js/main.7ec0d5c7.js",
+    "static/js/453.74088c6a.chunk.js": "/yumemi-frontend-coding-test/static/js/453.74088c6a.chunk.js",
+    "index.html": "/yumemi-frontend-coding-test/index.html",
+    "main.d5289b2f.css.map": "/yumemi-frontend-coding-test/static/css/main.d5289b2f.css.map",
+    "main.7ec0d5c7.js.map": "/yumemi-frontend-coding-test/static/js/main.7ec0d5c7.js.map",
+    "453.74088c6a.chunk.js.map": "/yumemi-frontend-coding-test/static/js/453.74088c6a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d5289b2f.css",
-    "static/js/main.1c974545.js"
+    "static/js/main.7ec0d5c7.js"
   ]
 }
