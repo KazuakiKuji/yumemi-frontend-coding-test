@@ -6,7 +6,7 @@
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^8.0.0",
     "@testing-library/react": "^16.3.3",
-    "@testing-library/user-event": "^14.6.12",
+    "@testing-library/user-event": "^14.6.13",
     "axios": "^1.21.1",
     "bootstrap": "^5.3.9",
     "chart.js": "^4.6.1",
